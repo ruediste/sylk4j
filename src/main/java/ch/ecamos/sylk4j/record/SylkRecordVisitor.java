@@ -10,4 +10,6 @@ public interface SylkRecordVisitor<T> {
 
 	T visit(SylkRecordComment record);
 
+	T visit(SylkRecordFormat record);
+
 }

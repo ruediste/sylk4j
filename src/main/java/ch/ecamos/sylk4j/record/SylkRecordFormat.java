@@ -1,13 +1,14 @@
 package ch.ecamos.sylk4j.record;
 
-public class SylkRecordCellContent extends SylkRecord {
+public class SylkRecordFormat extends SylkRecord {
 
 	public Integer x;
-	public String valueQuoted;
-	public String valueUnquoted;
 	public Integer y;
 
-	public SylkRecordCellContent(SylkReader sylkReader) {
+	public SylkRecordFormat() {
+	}
+
+	public SylkRecordFormat(SylkReader sylkReader) {
 		while (true) {
 			switch (sylkReader.peek()) {
 			case STRING_UNQUOTED: {
@@ -19,13 +20,6 @@ public class SylkRecordCellContent extends SylkRecord {
 					break;
 				case 'Y':
 					y = Integer.parseInt(field.substring(1));
-					sylkReader.removeEndField();
-					break;
-				case 'K':
-					if (field.length() == 1)
-						valueQuoted = sylkReader.nextStringQuoted();
-					else
-						valueUnquoted = field.substring(1);
 					sylkReader.removeEndField();
 					break;
 				default:
@@ -45,5 +39,4 @@ public class SylkRecordCellContent extends SylkRecord {
 	public <T> T accept(SylkRecordVisitor<T> visitor) {
 		return visitor.visit(this);
 	}
-
 }

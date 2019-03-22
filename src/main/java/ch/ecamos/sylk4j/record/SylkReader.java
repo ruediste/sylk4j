@@ -131,4 +131,25 @@ public class SylkReader {
 	public void throwError(String message) {
 		throw new RuntimeException("Line " + lineNr + "/" + (index + 1) + ": " + message);
 	}
+
+	public String removeRestOfField() {
+		int startIndex = index;
+		loop: while (true) {
+			switch (peek()) {
+			case END_DOCUMENT:
+			case END_FIELD:
+			case END_LINE:
+				break loop;
+			case STRING_QUOTED:
+				nextStringQuoted();
+				break;
+			case STRING_UNQUOTED:
+				nextStringUnquoted();
+				break;
+			default:
+				throw new UnsupportedOperationException();
+			}
+		}
+		return line.substring(startIndex, index);
+	}
 }

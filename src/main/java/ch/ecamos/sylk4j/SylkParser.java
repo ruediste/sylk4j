@@ -8,6 +8,7 @@ import ch.ecamos.sylk4j.record.SylkReader;
 import ch.ecamos.sylk4j.record.SylkRecord;
 import ch.ecamos.sylk4j.record.SylkRecordCellContent;
 import ch.ecamos.sylk4j.record.SylkRecordComment;
+import ch.ecamos.sylk4j.record.SylkRecordFormat;
 import ch.ecamos.sylk4j.record.SylkRecordId;
 import ch.ecamos.sylk4j.record.SylkRecordUnknown;
 import ch.ecamos.sylk4j.record.SylkToken;
@@ -45,6 +46,9 @@ public class SylkParser {
 				break;
 			case "C":
 				record = new SylkRecordCellContent(sylkReader);
+				break;
+			case "F":
+				record = new SylkRecordFormat(sylkReader);
 				break;
 			case "":
 				record = new SylkRecordComment(sylkReader);
